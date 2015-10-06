@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="DNA_app">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Login</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font -->
+    <link href='https://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Noto+Serif' rel='stylesheet' type='text/css'>
+    <!-- Custom CSS -->
+    <link href="/static/css/site.css" rel="stylesheet">
+    <!-- Angular Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.3.15/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-local-storage/0.2.2/angular-local-storage.js"></script>
+    <script src="/static/script.js"></script>
+    <!-- Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+    <style>
+    body {
+        padding-top: 50px;
+        font-family: 'Dosis';
+    }
+    .width {
+        width: 50%;
+    }
+    #padding {
+      padding-top: 10px;
+    }
+    #font {
+      font-family: 'Noto Serif';
+    }
+    /* Glow */
+    .hvr-glow {
+      display: inline-block;
+      vertical-align: middle;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-transition-duration: 0.3s;
+      transition-duration: 0.3s;
+      -webkit-transition-property: box-shadow;
+      transition-property: box-shadow;
+    }
+    .hvr-glow:hover, .hvr-glow:focus, .hvr-glow:active {
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+    }
+
+    </style>
+</head>
+
+<body>
+
+      <nav class=" iobio-bg-color navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href=""><span class='iobio-txt-color'>taxonomer</span>.iobio</a>
+          </div>
+
+
+          <div class="nav navbar-nav navbar-right" ng-controller="LoginController">
+              <a style="margin-right: 20px" href="static/info_index.html">more info</a>
+              <!-- <a style="margin-right: 20px" href="http://iobio.io">an iobio project</a> -->
+              <a style="margin-right: 20px" href="/"><span class='iobio-txt-color'>home</span></a>
+          </div>
+
+        </div>
+      </nav>
+
+    <!-- Page Content -->
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <div class="" id="loginModal" ng-controller="UserController">
+                      <div class="modal-header">
+                        <h3>Have an Account?</h3>
+                        <h5 id="red"><%- message %></h5>
+                      </div>
+                      <div class="modal-body">
+                        <div class="well">
+                          <ul class="nav nav-tabs">
+                            <li class="active"><a href="#login" data-toggle="tab">Login</a></li>
+                            <li><a href="#create" data-toggle="tab" ng-click="registered=false">Create Account</a></li>
+                          </ul>
+                          <div id="myTabContent" class="tab-content">
+                            <div class="tab-pane active in" id="login">
+                                <form >
+                                  <div class="form-group" id="padding">
+                                    <label for="exampleInputEmail1">Email address</label>
+                                    <input type="email" class="form-control width" name="email" ng-model="user_input.email" placeholder="Email" required>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="exampleInputPassword1">Password</label>
+                                    <input type="password" class="form-control width" name="password" ng-model="user_input.password" placeholder="Password" required>
+                                  </div>
+                                  <input type="submit" class="btn btn-info hvr-glow" value="Log In" ng-click="login()">
+                                </form>
+                            </div><!-- login -->
+                            <div class="tab-pane fade" id="create">
+                                <form ng-hide="registered">
+                                  <div class="form-group" id="padding">
+                                    <label>First Name</label>
+                                    <input type="text" class="form-control width" name="first_name" ng-model="new_user.first_name" placeholder="First Name" required>
+                                  </div>
+                                  <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input type="text" class="form-control width" name="last_name" ng-model="new_user.last_name" placeholder="Last Name" required>
+                                  </div>
+                                  <div class="form-group">
+                                    <label>Email address</label>
+                                    <input type="text" class="form-control width" name="email" ng-model="new_user.email" placeholder="Email" required>
+                                  </div>
+                                  <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control width" name="password" ng-model="new_user.password" placeholder="Password" required>
+                                  </div>
+                                  <div class="form-group">
+                                    <label>Confirm Password</label>
+                                    <input type="password" class="form-control width" name="confirm" ng-model="new_user.confirm" placeholder="Confirm Password" required>
+                                  </div>
+                                  <input type="submit" class="btn btn-success hvr-glow" value="Register" ng-click="addUser()" ng-disabled="register_processing">
+                                </form>
+                                <form ng-show="registered">
+                                	<div class="form-group">
+                                	Please check your email and confirm your email address. Thanks.
+                                	</div>
+                                </form>
+                            </div><!-- /#create -->
+                        </div><!-- /#myTabContent -->
+                    </div><!-- /.well -->
+                  </div><!-- /.modal-body -->
+                </div><!-- /#loginModal -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+
+
+<!-- JavaScript -->
+    <!-- jQuery Version 1.11.1 -->
+    <script src="/static/js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/static/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

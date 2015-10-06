@@ -1,0 +1,22 @@
+{
+  "name": "express-node-mysql",
+  "dependencies": {
+    "angular-local-storage": "^0.2.2",
+    "body-parser": "*",
+    "crypto": "*",
+    "express": "*",
+    "express-myconnection": "*",
+    "fs": "*",
+    "path": "*",
+    "moment": "*",
+    "mysql": "*",
+    "ejs": "*",
+    "lodash": "*",
+    "async": "*",
+    "nodemailer": "*",
+    "mocha": "*",
+    "should": "*",
+    "smtp-tester": "*",
+    "supertest": "*"
+  }
+}
